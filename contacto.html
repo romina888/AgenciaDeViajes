@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodoViajero</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles-contacto.css">
+</head>
+<body>
+    <header class="header">
+        <div class="contenedor contenido-header">
+            <div class="barra">
+                <div class="logo">
+                    <h1 class="nombre-sitio">Codo<span>Viajero</span></h1>
+                </div>
+            
+                <div class="contacto">
+                    <a href="tel:011-15-51482245" class="telefono">011-15-51482245</a>
+                    <nav class="navegacion">
+                        <a class="link" href="index.html">Inicio</a>
+                        <a class="link" href="#">Nosotros</a>
+                        <a class="link" href="preguntasFrecuentes.html">Preguntas Frecuentes</a>
+                        <a class="link" href="contacto.html">Contacto</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="slogan">
+                <h1>Tu viaje perfecto </h1>
+                <p>comienza aquí</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="contenedor">
+
+        <form class="formulario ingresoDeDatos">
+        
+        <fieldset>
+        <legend>Tus Datos</legend>
+            <label for="nombreapellido">Nombre y Apellido</label>
+            <input type="text" id="nombreapellido" class="input-padron" required>
+
+            <label for="correoelectronico">Correo Electrónico</label>
+            <input type="email" id="correoelectronico" class="input-padron" required placeholder="ejemplo@dominio.com">
+
+            <label for="telefono">Teléfono</label>
+            <input type="number" id="telefono" class="input-padron" required placeholder="(cod area) xx-xxxx-xxxx">
+
+            <label for="mensaje">Envianos tu consulta</label>
+            <textarea cols="60" rows="10" type="text" id="mensaje" class="input-padron" required></textarea>
+        </fieldset>
+
+
+            <fieldset>
+                <legend>Información Extra</legend>
+                <h4>Cómo le gustaría ser contactado: </h4>
+                <label for="radio-email"><input type="radio" name="contacto" value="email" id="radio-email">Email</label>            
+
+                <label for="radio-telefono"><input type="radio" name="contacto" value="telefono" id="radio-telefono">Telefono</label>               
+
+                <label for="radio-whatsapp"><input type="radio" name="contacto" value="whatsapp" id="radio-whatsapp" checked>Whatsapp</label>
+                
+                <h4>¿En que horario prefiere ser atendido?</h4>
+                <select>                
+                    <option>Por La Mañana</option>
+                    <option>Por La Tarde</option>
+                    <option>Por La Noche</option>
+                    <option>Disponible en todo momento</option>
+                </select>
+            </fieldset>
+            
+            
+            <label><input type="checkbox" class="checkbox" checked> ¿Le gustaría recibir novedades de nuestro sitio Web?</label>
+            <input class="enviarFormulario" type="submit" value="Enviar Formulario">
+            
+        
+        </form>
+    </main>
+
+    <footer class="footer">
+        <div class="contenedor">
+            <div class="barra">
+                <div class="logo">
+                    <h1 class="nombre-sitio">
+                        Codo<span>Viajero</span>
+                    </h1>
+                </div>
+
+                <div class="contacto">
+                    <a href="tel:011-15-51482245" class="telefono">011-15-51482245</a>
+                    <nav class="navegacion">
+                        <a class="link" href="index.html">Inicio</a>
+                        <a class="link" href="#">Nosotros</a>
+                        <a class="link" href="preguntasFrecuentes.html">Preguntas Frecuentes</a>
+                        <a class="link" href="contacto.html">Contacto</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <p class="copyright">Todos los derechos reservados &copy; </p>
+    </footer>
+    
+</body>
+</html>

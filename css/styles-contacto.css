@@ -1,0 +1,285 @@
+:root {
+    --blanco: #FFF;
+    --negro: #111111;
+    --gris: #343A40;
+    --fuentePrincipal: 'Raleway', sans-serif;
+}
+html {
+    font-size: 62.5%; /* 1rem = 10px */
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: var(--fuentePrincipal);
+    font-size: 1.6rem;
+    line-height: 1.8;
+}
+h1, h2, h3 {
+    font-weight: 900;
+    line-height: 1.2;
+    margin: 1rem 0 4rem 0;
+}
+
+h1{
+    font-size: 4.8rem;
+}
+
+h2 {
+    font-size: 4rem;
+}
+h3{
+    font-size: 3rem;
+}
+
+a {
+    text-decoration: none;
+}
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.contenedor {
+    max-width: 120rem;
+    margin: 0 auto;
+    width: 90%;
+}
+
+/* Header */
+.header {
+    min-height: 60rem;
+    background-image: url(../img/PuenteDeLaMujer.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:  center;
+    padding: 5rem 0;
+}
+.contenido-header {
+    display: flex;
+    flex-direction: column;
+    height: calc(60rem - 4rem);
+    justify-content: space-between;
+    color: var(--blanco);
+}
+.nombre-sitio {
+    font-weight: 300;
+    text-align: center;
+    font-size: 3rem;
+}
+
+@media (min-width: 915px) { 
+    .nombre-sitio {
+        font-size: 5rem;
+    }
+}
+
+.nombre-sitio span {
+    font-weight: 900;
+}
+
+@media (min-width: 915px) { 
+    .barra {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+.contacto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@media (min-width: 915px) { 
+    .contacto {
+        align-items: flex-end;
+    }
+}
+.telefono {
+    display: flex;
+}
+.telefono::before {
+    content: '';
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    background-image: url(../img/telefono.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin-right: 1rem;
+}
+
+.header a {
+    color: var(--blanco);
+    font-size: 2rem;
+}
+
+.navegacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+}
+@media (min-width: 915px) { 
+    .navegacion {
+        flex-direction: row;
+    }
+}
+.navegacion a {
+    padding: .5rem;
+    transition: background-color 300ms;
+    width: 100%;
+    text-align: center;
+}
+@media (min-width: 915px) { 
+    .navegacion a {
+        padding: 1rem 2rem;
+    }
+}
+.navegacion a:hover {
+    background-color: rgb( 255 255 255 / .5 );
+    color: var(--negro);
+}
+
+.slogan {
+    text-align: center;
+}
+@media (min-width: 915px) { 
+    .slogan {
+        text-align: right;
+    }
+}
+.slogan h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+@media (min-width: 915px) { 
+    .slogan h1 {
+        font-size: 5rem;
+    }
+}
+.slogan p {
+    margin: 0;
+    line-height: 1;
+}
+
+/* Botones */
+.btn {
+    background-color: #ff0e0ece;
+    display: block;
+    color: #FFF;
+    text-transform: uppercase;
+    font-weight: 900;
+    padding: 1rem;
+    transition: background-color .3s ease-out ;
+    text-align: center;
+    border: none;
+}
+.btn:hover {
+    background-color: #550303;
+    cursor: pointer;
+}
+
+/* Main */
+main {
+    background-color: #ffffffcb;
+    padding: 2% 3%;
+}
+
+.ingresoDatos {
+    font-family: var(--fuentePrincipal);
+    font-size: 1.6rem;
+    line-height: 1.8;
+}
+
+form label{
+    display: flex;
+    font-size: 20px;
+    margin: 0 0 10px;
+}
+
+.input-padron {
+    display: block;
+    margin: 0 0 20px;
+    padding: 10px 25px;
+    width: 100%;
+}
+
+.checkbox {
+    margin: 20px 2px;
+}
+
+.enviarFormulario {
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+    padding: 20px 70px;
+    transition: color 0.3s ease, text-decoration 0.3s ease, background-color 0.3s ease, transform 0.3s ease-in-out; 
+    cursor: pointer;
+}
+
+.enviarFormulario:hover {
+    color: #000000;
+    background-color: #67d8d2; 
+    transform: scale(1.1); 
+    text-decoration: none; 
+}
+
+.enviarFormulario:active {
+    background-color: #2d948f; 
+    
+}
+
+.formulario{
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+.formulario fieldset {
+    border: 1px solid black;
+    margin-bottom: 2rem;
+ }
+
+
+.formulario legend{
+    background-color: #2d948f;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: var(--blanco);
+    padding: 1rem;
+
+
+}
+
+/* Footer */
+.footer {
+    height: 50rem;
+    background-image: url(../img/footer2.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    color: var(--blanco);
+    
+}
+.footer a {
+    color: var(--blanco);
+    font-size: 2rem;  
+}
+.copyright {
+    background-color: var(--negro);
+    text-align: center;
+    margin: 5rem 0 0 0;
+    font-size: 2rem;
+    padding: 1rem;
+}
+
