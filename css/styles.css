@@ -33,6 +33,10 @@ h2 {
 h3{
     font-size: 3rem;
 }
+h4{
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 a {
     text-decoration: none;
@@ -238,9 +242,13 @@ img {
 
 .paquete {
     background-color: var(--gris);
-    /* padding: 0.5rem; */
     margin-bottom: 2rem;
     border-radius: 1rem;
+}
+
+.paquete img{
+    height: 36.5%;
+    width: 100%;
 }
 
 
@@ -270,6 +278,7 @@ img {
 .paquete__precio {
     font-size: 2.8rem;
     font-weight: 900;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Galeria */
