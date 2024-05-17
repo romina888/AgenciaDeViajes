@@ -247,7 +247,7 @@ img {
 }
 
 .paquete img{
-    height: 36.5%;
+    height: 20rem;
     width: 100%;
 }
 
@@ -301,7 +301,26 @@ img {
 .galeria img {
     object-fit: cover;
     height: 100%;
+    border-radius: 4px;
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 50%;
 }
+
+@keyframes reveal {
+    from{
+        opacity: 0;
+        translate: 0 100px;
+        scale: .5;
+    }
+    to{
+        opacity: 1;
+        translate: 0 0;
+        scale: 1;
+    }
+}
+
+
 .galeria .imagen:nth-child(2) {
     grid-column: 2 / 3;
     grid-row: 1 / 3;
