@@ -24,6 +24,17 @@ function validateForm(event)
     return true;
   }
 
+  if(fileInput.trim() === "")
+    {
+    alert("Por favor valida con una imagen");
+    return false; 
+  }
+  
+  if (!fileselector(fileInput)) {
+    alert= ("Por favor, selecciona una imagen");
+    return true;
+  } 
+
 function isValidEmail(correoelectronico)
 {
   let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
