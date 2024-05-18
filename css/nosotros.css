@@ -148,8 +148,8 @@
 .contenedor-iconos>div{
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1em;
-
     width: 50%;
 }
 .contenedor-iconos>div>span{
