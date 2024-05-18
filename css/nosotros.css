@@ -9,7 +9,7 @@
 
 .contenedor-principal-nosotros{
     position: relative;
-    width: 160rem;
+    width: 90%;
     margin: 0px auto;
     font-family: 'Raleway', sans-serif;
     font-size: var(--tamanio-de-letras-estandar);
@@ -182,6 +182,9 @@
     padding: 1rem;
     text-align: center;
     border: none;
+}
+.contenedor-suscripcion>form>button:hover{
+    background-color: #fc4949b4;
 }
 
 .img-estilo{
