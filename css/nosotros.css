@@ -235,23 +235,21 @@
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(3, 1fr);
     }
-    .grid-container .imagen-grande{
-        grid-column: span 2;
-    }
     .grid.container .card-texto{
         grid-column: span 1;
         grid-row: span 1;
     }
-    .img-estilo{
+    .grid-container .img-estilo{
         grid-column: span 1;
         grid-row: span 1;
-
-        border: red solid 2px;
     }
-    .card-texto{
+    .grid-container .card-texto{
         grid-column: span 1;
         grid-row: span 1;
     
+    }
+    .grid-container .imagen-grande{
+        grid-column: span 2;
     }
     
 }
