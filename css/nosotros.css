@@ -8,9 +8,14 @@
 }
 
 .contenedor-principal-nosotros{
-    position: relative;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;    /* Centra verticalmente */
+    /* height: 100vh;    */
+    flex-direction: column;
+    /* position: relative;
     width: 90%;
-    margin: 0px auto;
+    margin: 0px auto; */
     font-family: 'Raleway', sans-serif;
     font-size: var(--tamanio-de-letras-estandar);
     
@@ -20,78 +25,96 @@
     font-weight: var(--extra-bold);
 }
 
+/* codoViajero nuestra mision  */
 .contenedor-codo-viajero{
     width: 100%;
     position: relative;
 
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
     justify-content: center;
     align-items: center;
     margin: 2em auto ;
-    margin-right: 0px;
 }
 
 .contenedor-codo-viajero .imagen-codo-viajero{
-    width: 30em;
+    grid-column: 1/4;
     z-index: 1;  
 }
+
 .contenedor-codo-viajero .imagen-codo-viajero>img{
     border-radius: 2%;
 }
 
 .contenedor-codo-viajero .texto-codo-viajero{
-    width: 30em;
+    font-weight: var(--bold);
+
+    word-wrap: break-word;
+    white-space: normal;
+    grid-column: 4/7;
     text-shadow: 2px 2px 5px rgb(11 6 6 / 62%);
     margin-left: -4em;
-    margin-top: 8em;
     color: white;
     z-index: 2;  
 }
 
+.contenedor-codo-viajero::before{
+    position: absolute;
+    content: " ";
+    display: block;
+    width: 100%;
+    background-color: #bdc0c3;
+    height: 80%;
+    z-index: 0;    
+}
+    
 .contenedor-codo-viajero .texto-codo-viajero>h3{
     font-size: var(--tamanio-de-letras-h3);
     font-weight: var(--extra-bold);
 }
 
 .contenedor-codo-viajero .texto-codo-viajero>p{
-    margin-right: 0px;
     padding-left: 1em;
-    font-weight: var(--bold);
 } 
 
-.contenedor-codo-viajero::before{
-    position: absolute;
-    content: " ";
-
-    display: block;
-    background-color: #bdc0c3;
-
-    width: 100%;
-    height: 60%;
-    bottom: 0px;
-    left: 0px;
-    z-index: 0;    
-
+.contenedor-iconos{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: center;
+    padding-bottom: 2em;
+    gap: 4em;
 }
+
+.contenedor-iconos>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    gap: 1em;
+    width: 50%;
+}
+.contenedor-iconos>div>span{
+    text-align: center;
+    font-weight: var(--bold);
+}
+
 
 .grid-container {
     color: white;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 1px;
-    box-sizing:border-box;
-    border-radius: 5%;
     width: 100%;
-    min-height: 500px;
     margin: 0 auto;
 
 }
 .grid-container>div>h3,
 .grid-container>div>p{
-    z-index: 2;
     margin: 1em 1em 2em 1em;
     text-align: left;
     word-wrap: break-word;
+    z-index: 2;
 }
 
 .grid-container>div>h3{
@@ -103,17 +126,7 @@
     border-bottom: solid red 3px;
 }
 
-.cell-2-2{
-    grid-column: span 3;
-    grid-row: span 2;
-}
-
-.cell-2-1{
-    grid-column: span 2;
-    grid-row: span 1;
-}
-
-.imagen-grande::before {
+.grid-container .imagen-grande::before {
     position: absolute;
     content: "";
     display: block;
@@ -124,60 +137,60 @@
     z-index: 1;    
 }
 
-.imagen-grande{
+.grid-container .imagen-grande{
     text-shadow: 2px 2px 5px rgb(11 6 6 / 62%);
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    grid-column: span 3;
+    grid-row: span 2;
 }
 
-.card-texto{
+.grid-container .card-texto{
     color: black;
     text-shadow: none;
+    grid-column: span 2;
+    grid-row: span 1;
+
 }
 
-.contenedor-iconos{
-    margin: 4em auto;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 4em;
-    justify-items: center;
+.grid-container .img-estilo{
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.contenedor-iconos>div{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1em;
-    width: 50%;
-}
-.contenedor-iconos>div>span{
-    text-align: center;
-    font-weight: var(--bold);
-}
 .contenedor-suscripcion{
-
-    margin: 4em auto;
     display: flex;
+    margin: 4em auto;
     flex-direction: column;
     align-items: center;
 }
-.contenedor-suscripcion>form{
+
+.contenedor-form-suscripcion{
+    align-items: center;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1em;
-    align-items: center;
 }
+
+.contenedor-form-suscripcion input {
+    grid-column: span 2;
+}
+
+.contenedor-form-suscripcion button{
+    grid-column: span 1;
+}
+
 .contenedor-suscripcion>form>label{
     display: none;
 }
 
-.contenedor-suscripcion>form>button{
+.contenedor-suscripcion>form button{
     background-color: #ff0e0ece;
     color: #FFF;
-    text-transform: uppercase;
-    display: block;
     font-weight: var(--extra-bold);
     padding: 1rem;
     text-align: center;
@@ -187,9 +200,71 @@
     background-color: #fc4949b4;
 }
 
-.img-estilo{
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+@media (max-width: 1225px) {
+    .contenedor-iconos{
+        gap: 2em;
+    }
 }
+
+@media (max-width: 1025px) {
+    :root{
+        --tamanio-de-letras-h3: 3em;
+        --tamanio-de-letras-estandar: 2em;
+    }
+    .contenedor-codo-viajero .imagen-codo-viajero{
+        grid-column: 1/4;
+    }
+    
+    .contenedor-codo-viajero .texto-codo-viajero{
+        margin-top: 0px;
+        grid-column: 4/7;
+    }
+    .contenedor-codo-viajero::before{
+        height: 80%;
+        bottom: auto;
+        margin: auto;
+    }
+
+    .contenedor-iconos{
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        width: 30%;
+    }
+    .contenedor-iconos>div{
+        width: 40%;
+    }
+    
+    .grid-container{
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+    .grid-container .imagen-grande{
+        grid-column: span 2;
+    }
+    .grid.container .card-texto{
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    .img-estilo{
+        grid-column: span 1;
+        grid-row: span 1;
+
+        border: red solid 2px;
+    }
+    .card-texto{
+        grid-column: span 1;
+        grid-row: span 1;
+    
+    }
+    
+}
+
+@media (max-width: 767px) {
+    :root{
+        --tamanio-de-letras-h3: 2.2em;
+        --tamanio-de-letras-estandar: 1.8em;
+    }
+    .contenedor-iconos>div{
+        font-size: 0.8em;
+    }
+    }
