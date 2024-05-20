@@ -9,15 +9,13 @@
 
 .contenedor-principal-nosotros{
     display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center;    /* Centra verticalmente */
-    /* height: 100vh;    */
+    justify-content: center;
+    align-items: center; 
     flex-direction: column;
-    /* position: relative;
-    width: 90%;
-    margin: 0px auto; */
     font-family: 'Raleway', sans-serif;
     font-size: var(--tamanio-de-letras-estandar);
+    width: 90%;
+    margin: auto;
     
 }
 .contenedor-principal-nosotros>h2{
@@ -123,7 +121,6 @@
     font-size: 3rem;
     font-weight: var(--extra-bold);
     line-height: 1.2;
-    border-bottom: solid red 3px;
 }
 
 .grid-container .imagen-grande::before {
