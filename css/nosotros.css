@@ -6,7 +6,9 @@
     --bold: 600;
     --extra-bold: 900;
 }
-
+a {
+    text-decoration: none;
+}
 .contenedor-principal-nosotros{
     display: flex;
     justify-content: center;
