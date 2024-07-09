@@ -2,8 +2,8 @@
 
 ## Requisitos
 
-- Node.js (versión 12 o superior)
-- MySQL (versión 5.7 o superior)
+- Node.js
+- MySQL 
 
 ## Instala las dependencias:
 

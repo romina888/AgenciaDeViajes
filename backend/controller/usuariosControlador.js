@@ -1,6 +1,6 @@
 const db = require('../db/db');
 
-const crearUsuario = (req, res) =>{
+const CrearUsuario = (req, res) =>{
     const {nombre,apellido,correoElectronico,contra} = req.body;
    
     const sql = `INSERT INTO 
@@ -23,8 +23,33 @@ const crearUsuario = (req, res) =>{
             });
     });
 };
+   
+const ObtenerUsuarioPorId = (req, res) =>{
+    const {id} = req.params;
+    const sql = 'SELECT * FROM Usuarios WHERE UsuarioID = ?';
+    db.query(sql,[id], (err,result) =>
+    {
+        if(err) throw err;        
+        res.json(result);
+    });
+};
+
+const BorrarUsuario = (req, res) =>{
+    const {id} = req.params;
+    const sql  = 'DELETE FROM Usuarios WHERE UsuarioID = ?';
+    db.query(sql,[id],(err,result) =>
+    {
+        if(err) throw err;
+        res.json(
+            {
+                message: 'Usuario eliminado'
+            });
+    });
+};
 
 module.exports = 
 {
-    crearUsuario,
+    CrearUsuario,
+    ObtenerUsuarioPorId,
+    BorrarUsuario
 }

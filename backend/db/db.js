@@ -18,6 +18,70 @@ function crearTabla(query) {
     });
 }
 
+function AgregarDestinos(){
+    const queryInsertarDestinos = `
+        INSERT INTO Destinos (Nombre, Descripcion, Ubicacion) VALUES
+        ('Bariloche', 'Destino turístico en la Patagonia', 'Río Negro, Argentina'),
+        ('Jujuy', 'Destino con paisajes de montaña', 'Jujuy, Argentina'),
+        ('Merlo, San Luis', 'Destino conocido por su microclima', 'San Luis, Argentina'),
+        ('Las Cataratas del Iguazú', 'Una de las maravillas naturales del mundo', 'Misiones, Argentina'),
+        ('Córdoba', 'Ciudad histórica con gran vida nocturna', 'Córdoba, Argentina'),
+        ('San Rafael, Mendoza', 'Destino famoso por sus bodegas y paisajes', 'Mendoza, Argentina');`;
+
+        connection.query('SELECT COUNT(*) AS count FROM Destinos', (error, results) => {
+            if (error) throw error;
+
+            if (results[0].count === 0) {
+                connection.query(queryInsertarDestinos, (error, results) => {
+                    if (error) throw error;
+                    console.log('Datos de destinos insertados.');
+                });
+            } else {
+                console.log('La tabla de destinos ya contiene datos.');
+            }
+        });
+}
+function AgregarAlojamientos(){
+    const queryInsertarAlojamientos = `
+        INSERT INTO Alojamientos (Nombre, Direccion, Tipo, PrecioPorNoche, DestinoID) VALUES
+        ('Hotel Llao Llao', 'Av. Bustillo Km. 25, Bariloche', 'hotel', 300.00, 1),
+        ('Hostal del Lago', 'Calle 24, Bariloche', 'hostal', 50.00, 1),
+        ('Apartamentos Catedral', 'Catedral Alta Patagonia, Bariloche', 'apartamento', 120.00, 1),
+
+        ('Hotel Huacalera', 'Ruta 9 Km. 1790, Jujuy', 'hotel', 100.00, 2),
+        ('Hostal Purmamarca', 'Calle Belgrano 123, Jujuy', 'hostal', 40.00, 2),
+        ('Apartamentos Tilcara', 'Av. Costanera 567, Jujuy', 'apartamento', 90.00, 2),
+
+        ('Hotel Colonial', 'Av. del Sol 123, Merlo', 'hotel', 80.00, 3),
+        ('Hostal El Mirador', 'Calle de los Almendros 456, Merlo', 'hostal', 35.00, 3),
+        ('Apartamentos Las Sierras', 'Calle de la Sierra 789, Merlo', 'apartamento', 70.00, 3),
+
+        ('Gran Hotel Cataratas', 'Av. Victoria Aguirre 150, Iguazú', 'hotel', 200.00, 4),
+        ('Hostal Cataratas', 'Calle Fray Luis Beltrán 789, Iguazú', 'hostal', 60.00, 4),
+        ('Apartamentos Iguazú', 'Av. Tres Fronteras 123, Iguazú', 'apartamento', 150.00, 4),
+
+        ('Hotel Azur Real', 'San Jerónimo 243, Córdoba', 'hotel', 110.00, 5),
+        ('Hostal Córdoba', 'Calle Alvear 456, Córdoba', 'hostal', 45.00, 5),
+        ('Apartamentos Nueva Córdoba', 'Obispo Trejo 1100, Córdoba', 'apartamento', 95.00, 5),
+
+        ('Hotel Tower Inn', 'Hipólito Yrigoyen 774, San Rafael', 'hotel', 120.00, 6),
+        ('Hostal San Rafael', 'Av. Mitre 383, San Rafael', 'hostal', 50.00, 6),
+        ('Apartamentos Los Funes', 'Calle General Paz 123, San Rafael', 'apartamento', 80.00, 6);`;
+
+        connection.query('SELECT COUNT(*) AS count FROM Alojamientos', (error, results) => {
+            if (error) throw error;
+    
+            if (results[0].count === 0) {
+                connection.query(queryInsertarAlojamientos, (error, results) => {
+                    if (error) throw error;
+                    console.log('Datos de alojamientos insertados.');
+                });
+            } else {
+                console.log('La tabla de alojamientos ya contiene datos.');
+            }
+        });
+}
+
 connection.connect((err) => {
     if (err) {
         console.error("Error conectando a la base de datos", err);
@@ -88,6 +152,9 @@ connection.connect((err) => {
             crearTabla(queryCrearTablaDestinos);
             crearTabla(queryCrearTablaAlojamientos);
             crearTabla(queryCrearTablaReservas);
+
+            AgregarDestinos();
+            AgregarAlojamientos();
         });
     });
 });

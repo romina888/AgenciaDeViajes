@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const userController = require('../controller/CodoViajeControlador');
+const controladorUsuarios = require('../controller/usuariosControlador');
 
-router.post('/', userController.crearUsuario);
+router.post('/', controladorUsuarios.CrearUsuario);
+router.get('/:id', controladorUsuarios.ObtenerUsuarioPorId);
+router.delete('/:id', controladorUsuarios.BorrarUsuario);
 
 module.exports = router;
