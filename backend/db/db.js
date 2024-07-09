@@ -44,40 +44,50 @@ connection.connect((err) => {
                 return;
             }
 
-                    const queryCrearTablaUsuarios = `
-                        CREATE TABLE IF NOT EXISTS Usuarios (
-                            UsuarioID INT AUTO_INCREMENT PRIMARY KEY,
-                            nombre VARCHAR(100) NOT NULL,
-                            apellido VARCHAR(100) NOT NULL,
-                            CorreoElectronico VARCHAR(255) NOT NULL,
-                            Contraseña VARCHAR(255) NOT NULL
-                        );`;
+            const queryCrearTablaUsuarios = `
+            CREATE TABLE IF NOT EXISTS Usuarios (
+                UsuarioID INT AUTO_INCREMENT PRIMARY KEY,
+                Nombre VARCHAR(100) NOT NULL,
+                Apellido VARCHAR(100) NOT NULL,
+                CorreoElectronico VARCHAR(255) NOT NULL,
+                Contra VARCHAR(255) NOT NULL
+            );`;
         
-                    crearTabla(queryCrearTablaUsuarios);
-
-                    const queryCrearTablaAlojamientos = `
-                        CREATE TABLE IF NOT EXISTS Alojamientos (
-                            AlojamientoID INT AUTO_INCREMENT PRIMARY KEY,
-                            Nombre VARCHAR(100) NOT NULL,
-                            Direccion VARCHAR(200),
-                            Tipo ENUM('hotel', 'hostal', 'apartamento') NOT NULL,
-                            PrecioPorNoche DECIMAL(10, 2) NOT NULL
-                        );`;
-        
-                    crearTabla(queryCrearTablaAlojamientos);
-        
-                    const queryCrearTablaReservas = `
-                        CREATE TABLE IF NOT EXISTS Reservas (
-                            ReservaID INT AUTO_INCREMENT PRIMARY KEY,
-                            FechaInicio DATE,
-                            FechaFin DATE,
-                            PrecioTotal DECIMAL(10, 2),
-
-                            FOREIGN KEY (UsuarioID) REFERENCES Usuarios(UsuarioID),
-                            FOREIGN KEY (AlojamientoID) REFERENCES Alojamientos(AlojamientoID)
-                        );`;
-        
-                    crearTabla(queryCrearTablaReservas);
+            const queryCrearTablaDestinos = `
+                CREATE TABLE IF NOT EXISTS Destinos (
+                    DestinoID INT AUTO_INCREMENT PRIMARY KEY,
+                    Nombre VARCHAR(100) NOT NULL,
+                    Descripcion TEXT,
+                    Ubicacion VARCHAR(255) NOT NULL
+                );`;
+            
+            const queryCrearTablaAlojamientos = `
+                CREATE TABLE IF NOT EXISTS Alojamientos (
+                    AlojamientoID INT AUTO_INCREMENT PRIMARY KEY,
+                    Nombre VARCHAR(100) NOT NULL,
+                    Direccion VARCHAR(200),
+                    Tipo ENUM('hotel', 'hostal', 'apartamento') NOT NULL,
+                    PrecioPorNoche DECIMAL(10, 2) NOT NULL,
+                    DestinoID INT,
+                    FOREIGN KEY (DestinoID) REFERENCES Destinos(DestinoID) ON DELETE SET NULL
+                );`;
+            
+            const queryCrearTablaReservas = `
+                CREATE TABLE IF NOT EXISTS Reservas (
+                    ReservaID INT AUTO_INCREMENT PRIMARY KEY,
+                    FechaInicio DATE,
+                    FechaFin DATE,
+                    PrecioTotal DECIMAL(10, 2),
+                    UsuarioID INT,
+                    AlojamientoID INT,
+                    FOREIGN KEY (UsuarioID) REFERENCES Usuarios(UsuarioID),
+                    FOREIGN KEY (AlojamientoID) REFERENCES Alojamientos(AlojamientoID)
+                );`;
+            
+            crearTabla(queryCrearTablaUsuarios);
+            crearTabla(queryCrearTablaDestinos);
+            crearTabla(queryCrearTablaAlojamientos);
+            crearTabla(queryCrearTablaReservas);
         });
     });
 });
