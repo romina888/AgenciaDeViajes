@@ -1,4 +1,36 @@
-# CodoViajero
+# CodoViajero-backend
+
+## Requisitos
+
+- Node.js
+- MySQL 
+
+## Instala las dependencias:
+
+    ```sh
+    npm install
+    ```
+## Ejecutar:
+
+    ```sh
+    npm start
+    ```
+
+### Credenciales de la Base de Datos
+
+Abre el archivo `db.js` en el directorio `db` y asegurate de modificar las siguientes líneas con tus credenciales de MySQL:
+
+```javascript
+const mysql = require('mysql2');
+
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'TU_CONTRASEÑA',
+});
+```
+
+# CodoViajero-frontend
 
 ## Trabajo Práctico Desarrollo Web HTML, CSS y JavaScript
 

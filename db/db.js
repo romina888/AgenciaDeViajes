@@ -3,7 +3,7 @@ const mysql = require("mysql2");
 const connection = mysql.createConnection({
     host:'localhost',
     user:'root',
-    password:'4994825',
+    password:'123',
     port: 3306,
 });
 
@@ -102,7 +102,7 @@ connection.connect((err) => {
         }
 
 
-        console.log("Base de datos asegurada");
+        console.log("Base de datos creada");
 
         connection.changeUser({ database: 'CodoViajeroDB' }, (err) => {
             if (err) {
