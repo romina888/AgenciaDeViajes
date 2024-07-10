@@ -1,5 +1,6 @@
+
 :root {
-    --blanco: #FFF;
+     --blanco: #FFF;
     --negro: #111111;
     --gris: #343A40;
     --fuentePrincipal: 'Raleway', sans-serif;
@@ -189,7 +190,7 @@ main {
     padding: 2% 3%;
 }
 
-.ingresoDatos {
+.ingresoDatos .login {
     font-family: var(--fuentePrincipal);
     font-size: 1.6rem;
     line-height: 1.8;
@@ -255,6 +256,32 @@ form label{
     padding: 1rem;
 
 
+}
+
+/* Login */
+.body-registrarse{
+    background-image: url(../img/fondo.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.font-container{
+    color: #FFF;
+    width: 50rem;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-top: 5rem;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+}
+.sub-t, .p-registro{
+    text-align: center;
 }
 
 /* Footer */

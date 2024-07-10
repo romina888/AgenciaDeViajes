@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodoViajero</title>
-    <link rel="icon" href="img/travel-icon.ico">   
+    <link rel="icon" href="img/travel-icon.ico">    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/styles-contacto.css">
 </head>
-<body>
+<body class="body-registrarse">
     <header class="header">
         <div class="contenedor contenido-header">
             <div class="barra">
                 <div class="logo">
                     <h1 class="nombre-sitio">Codo<span>Viajero</span></h1>
                 </div>
-            
+               
                 <div class="contacto">
                     <a href="tel:011-15-51482245" class="telefono">011-15-51482245</a>
                     <nav class="navegacion">
@@ -27,7 +27,8 @@
                         <a class="link" href="preguntasFrecuentes.html">Preguntas Frecuentes</a>
                         <a class="link" href="contacto.html">Contacto</a>
                         <a class="link" href="registro.html">Registrate</a>
-                        <a class="link"href="login.html">Login</a>
+                        <a class="link"href="login">Login</a>
+
                     </nav>
                 </div>
             </div>
@@ -38,47 +39,24 @@
         </div>
     </header>
 
-    <main class="contenedor">
-
-        <form class="formulario ingresoDeDatos" id="myForm">
-        
-        <fieldset>
-        <legend>Tus Datos</legend>
-            <label for="nombreapellido">Nombre y Apellido</label>
-            <input type="text" id="nombreapellido" name="nombreapellido" class="input-padron">
-
-            <label for="correoelectronico">Correo Electrónico</label>
+    <main class="contenedor font-container">
+        <form class="formulario login" id="login">
+            <h2 class="sub-t">Crear Cuenta</h2>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" class="input-padron">
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" name="eapellido" class="input-padron">
+            <label class="sr-only" for="correoelectronico">Correo Electrónico</label>
             <input type="email" id="correoelectronico" name="correoelectronico" class="input-padron" placeholder="ejemplo@dominio.com">
+            <label class="sr-only" for="contraseña">Contraseña</label>
+            <input type="password" name="contraseña" id="contraseña" placeholder="***********" class="input-padron">
+        <button type="submit" class="enviarFormulario"> Registrarse </button>
 
-            <label for="telefono">Teléfono</label>
-            <input type="number" id="telefono" class="input-padron" required placeholder="(cod area) xx-xxxx-xxxx">
-
-            <label for="mensaje">Envianos tu consulta</label>
-            <textarea cols="60" rows="10" id="mensaje" class="input-padron" required ></textarea>
-        </fieldset>
-
-        <fieldset>
-                <legend>Información Extra</legend>
-                <h4>Cómo le gustaría ser contactado: </h4>
-                <label for="radio-email"><input type="radio" name="contacto" value="email" id="radio-email">Email</label>            
-
-                <label for="radio-telefono"><input type="radio" name="contacto" value="telefono" id="radio-telefono">Telefono</label>               
-
-                <label for="radio-whatsapp"><input type="radio" name="contacto" value="whatsapp" id="radio-whatsapp" checked>Whatsapp</label>
-                
-                <h4>¿En que horario prefiere ser atendido?</h4>
-                <select>                
-                    <option>Por La Mañana</option>
-                    <option>Por La Tarde</option>
-                    <option>Por La Noche</option>
-                    <option>Disponible en todo momento</option>
-                </select>
-            </fieldset>
-            <label><input type="checkbox" class="checkbox" checked> ¿Le gustaría recibir novedades de nuestro sitio Web?</label>
-            <label><input type= "file" id="imageInput"></label>
-            <button type="submit" class="enviarFormulario"> Enviar Formulario </button>
         </form>
+        <p class="p-registro">¿Ya estás registradp? - <a href="login.html">Login</a></p>
     </main>
+
+
 
     <footer class="footer">
         <div class="contenedor">
@@ -96,8 +74,6 @@
                         <a class="link" href="nosotros.html#nosotros">Nosotros</a>
                         <a class="link" href="preguntasFrecuentes.html">Preguntas Frecuentes</a>
                         <a class="link" href="contacto.html">Contacto</a>
-                        <a class="link" href="registro.html">Registrate</a>
-                        <a class="link"href="login.html">Login</a>
                     </nav>
                 </div>
             </div>
@@ -105,9 +81,7 @@
 
         <p class="copyright">Todos los derechos reservados &copy; </p>
     </footer>
-
-
-    <script src="index.js"></script>
     
 </body>
 </html>
+

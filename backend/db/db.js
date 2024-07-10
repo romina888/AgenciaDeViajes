@@ -3,8 +3,11 @@ const mysql = require("mysql2");
 const connection = mysql.createConnection({
     host:'localhost',
     user:'root',
-    password:'123'
-})
+    password:'4994825',
+    port: 3306,
+});
+
+/* Prueba de conexion */
 
 function crearTabla(query) {
     console.log("Ejecutando query " + query);

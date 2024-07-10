@@ -31,14 +31,14 @@ const BorrarReservaPorId = (req, res) =>{
         if(err) throw err;
         
         res.json({
-            mensaje : 'Reserva Creada',
+            mensaje : 'Reserva Eliminada',
             idUsuario: result.insertId
             });
     });
 };
 
 const ModificarReservaPorID = (req, res) => {
-    const id = req.params;
+    const {id} = req.params;
 
     const {fechaInicio,fechaFin,precioTotal,usuarioID,AlojamientoID} = req.body;
 
@@ -58,19 +58,30 @@ const ModificarReservaPorID = (req, res) => {
         WHERE
             ReservaID = ?;`;
             
-    db.query(sql, [[fechaInicio,fechaFin,precioTotal,usuarioID,AlojamientoID]], (err, result) => {
+    db.query(sql, [fechaInicio,fechaFin,precioTotal,usuarioID,AlojamientoID,id], (err, result) => {
 
         if(err) throw err;
         
         res.json({
             mensaje : 'Reserva modificada con exito',
-            idUsuario: result.insertId
+            idReserva: id
             });
     })
 }
 
+/* Obtener todos las reservas */
+const ObtenerTodasLasReservas = (req, res) =>{
+    const sql = 'SELECT * FROM Reservas';
+    db.query(sql,(err,result)=>
+    {
+        if(err) throw err;
+        res.json(result);
+    });
+};
+
 module.exports = {
     CrearReserva,
     BorrarReservaPorId,
-    ModificarReservaPorID
+    ModificarReservaPorID,
+    ObtenerTodasLasReservas
 }
