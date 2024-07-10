@@ -1,29 +1,49 @@
 const db = require('../db/db');
 
+const verificarUsuarioExistente = (correoElectronico, callback) => {
+    const queryBuscarUsuario = 'SELECT * FROM Usuarios WHERE CorreoElectronico = ?';
+    db.query(queryBuscarUsuario, [correoElectronico], (error, results) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, results.length > 0);
+      }
+    });
+  };
+
 const CrearUsuario = (req, res) =>{
     const {nombre,apellido,correoElectronico,contra} = req.body;
-   
-    const sql = `INSERT INTO 
-            Usuarios (Nombre,Apellido,CorreoElectronico,Contra) 
-            VALUES (?,?,?,?)`;
-
     if (!nombre || !apellido || !correoElectronico || !contra) {
         return res.status(400).json({ mensaje: 'Todos los campos son requeridos' });
     }
+    
+    verificarUsuarioExistente(correoElectronico, async (error, usuarioExistente) => {
+        if (error) {
+            console.error('Error al verificar usuario:', error);
+            return res.status(500).send('Error en el servidor');
+        }
+    
+        if (usuarioExistente) {
+        return res.status(409).send('El correo electrónico ya está registrado');
+        }
 
-    db.query(sql,[nombre,apellido,correoElectronico,contra], (err,result) =>
-    {
-        // console.log(sql)
-        if(err) throw err;
+        const sql = `INSERT INTO 
+        Usuarios (Nombre,Apellido,CorreoElectronico,Contra) 
+        VALUES (?,?,?,?)`;
 
+        db.query(sql,[nombre,apellido,correoElectronico,contra], (err,result) =>
+        {
+            if(err) throw err;
 
-        res.json({
-            mensaje : 'Usuario Creado',
-            idUsuario: result.insertId
-            });
-    });
+            res.json({
+                mensaje : 'Usuario Creado',
+                idUsuario: result.insertId
+                });
+        });
+    })
+    
 };
-   
+
 const ObtenerUsuarioPorId = (req, res) =>{
     const {id} = req.params;
     const sql = 'SELECT * FROM Usuarios WHERE UsuarioID = ?';
@@ -68,12 +88,14 @@ const ActualizarUsuarios = (req, res) =>{
         });
     });
 };
+
 module.exports = 
 {
     CrearUsuario,
     ObtenerUsuarioPorId,
     BorrarUsuario,
     ObtenerTodoslosUsuarios,
-    ActualizarUsuarios
+    ActualizarUsuarios,
+    verificarUsuarioExistente
 
 }
