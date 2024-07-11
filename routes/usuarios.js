@@ -4,7 +4,7 @@ const router = express.Router();
 const controladorUsuarios = require('../controller/usuariosControlador');
 
 router.post('/', controladorUsuarios.CrearUsuario);
-router.post('/login', controladorUsuarios.VerificarYCrearSesion);
+router.post('/login', controladorUsuarios.IniciarSesion);
 router.get('/:id', controladorUsuarios.ObtenerUsuarioPorId);
 router.delete('/:id', controladorUsuarios.BorrarUsuario);
 /* Probando obtener todos los usuarios */

@@ -1,8 +1,7 @@
 const db = require('../db/db');
 
-const VerificarYCrearSesion = (req, res) => {
+const IniciarSesion = (req, res) => {
     const { correoElectronico, contra } = req.body;
-    console.log(correoElectronico+" " + contra)
     if (!correoElectronico || !contra) {
         return res.status(400).json({ mensaje: 'Correo electrónico y contraseña son requeridos' });
     }
@@ -29,48 +28,39 @@ const VerificarYCrearSesion = (req, res) => {
     });
 };
 
-const verificarUsuarioExistente = (correoElectronico, callback) => {
-    const queryBuscarUsuario = 'SELECT * FROM Usuarios WHERE CorreoElectronico = ?';
-    db.query(queryBuscarUsuario, [correoElectronico], (error, results) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        callback(null, results.length > 0);
-      }
-    });
-  };
-
 const CrearUsuario = (req, res) =>{
-    const {nombre,apellido,correoElectronico,contra} = req.body;
+  
+    const { nombre, apellido, correoElectronico, contra } = req.body;
+    
     if (!nombre || !apellido || !correoElectronico || !contra) {
         return res.status(400).json({ mensaje: 'Todos los campos son requeridos' });
     }
     
-    verificarUsuarioExistente(correoElectronico, async (error, usuarioExistente) => {
+    const queryBuscarUsuario = 'SELECT * FROM Usuarios WHERE CorreoElectronico = ?';
+    const sqlInsertarUsuario = `INSERT INTO Usuarios (Nombre, Apellido, CorreoElectronico, Contra) VALUES (?, ?, ?, ?)`;
+
+    db.query(queryBuscarUsuario, [correoElectronico], (error, results) => {
         if (error) {
             console.error('Error al verificar usuario:', error);
             return res.status(500).send('Error en el servidor');
         }
-    
-        if (usuarioExistente) {
-        return res.status(409).send('El correo electrónico ya está registrado');
+
+        if (results.length > 0) {
+            return res.status(409).send('El correo electrónico ya está registrado');
         }
 
-        const sql = `INSERT INTO 
-        Usuarios (Nombre,Apellido,CorreoElectronico,Contra) 
-        VALUES (?,?,?,?)`;
-
-        db.query(sql,[nombre,apellido,correoElectronico,contra], (err,result) =>
-        {
-            if(err) throw err;
+        db.query(sqlInsertarUsuario, [nombre, apellido, correoElectronico, contra], (err, result) => {
+            if (err) {
+                console.error('Error al crear usuario:', err);
+                return res.status(500).send('Error en el servidor');
+            }
 
             res.json({
-                mensaje : 'Usuario Creado',
+                mensaje: 'Usuario Creado',
                 idUsuario: result.insertId
-                });
+            });
         });
-    })
-    
+    });  
 };
 
 const ObtenerUsuarioPorId = (req, res) =>{
@@ -125,6 +115,5 @@ module.exports =
     BorrarUsuario,
     ObtenerTodoslosUsuarios,
     ActualizarUsuarios,
-    verificarUsuarioExistente,
-    VerificarYCrearSesion
+    IniciarSesion
 }
