@@ -1,5 +1,34 @@
 const db = require('../db/db');
 
+const VerificarYCrearSesion = (req, res) => {
+    const { correoElectronico, contra } = req.body;
+    console.log(correoElectronico+" " + contra)
+    if (!correoElectronico || !contra) {
+        return res.status(400).json({ mensaje: 'Correo electrónico y contraseña son requeridos' });
+    }
+
+    const queryBuscarUsuario = 'SELECT * FROM Usuarios WHERE CorreoElectronico = ? and Contra = ?';
+    db.query(queryBuscarUsuario, [correoElectronico, contra], (error, results) => {
+        if (error) {
+            console.error('Error al verificar usuario:', error);
+            return res.status(500).send('Error en el servidor');
+        }
+
+        if (results.length === 0) {
+            return res.status(404).send('Usuario no encontrado');
+        }
+
+        const usuario = results[0];
+
+        if (usuario.Contra !== contra) {
+            return res.status(401).send('Contraseña incorrecta');
+        }
+
+        req.session.userId = usuario.UsuarioID;
+        return res.status(200).json({ mensaje: 'Inicio de sesión exitoso', usuario });
+    });
+};
+
 const verificarUsuarioExistente = (correoElectronico, callback) => {
     const queryBuscarUsuario = 'SELECT * FROM Usuarios WHERE CorreoElectronico = ?';
     db.query(queryBuscarUsuario, [correoElectronico], (error, results) => {
@@ -96,6 +125,6 @@ module.exports =
     BorrarUsuario,
     ObtenerTodoslosUsuarios,
     ActualizarUsuarios,
-    verificarUsuarioExistente
-
+    verificarUsuarioExistente,
+    VerificarYCrearSesion
 }
