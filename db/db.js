@@ -23,13 +23,13 @@ function crearTabla(query) {
 
 function AgregarDestinos(){
     const queryInsertarDestinos = `
-        INSERT INTO Destinos (Nombre, Descripcion, Ubicacion) VALUES
-        ('Bariloche', 'Destino turístico en la Patagonia', 'Río Negro, Argentina'),
-        ('Jujuy', 'Destino con paisajes de montaña', 'Jujuy, Argentina'),
-        ('Merlo, San Luis', 'Destino conocido por su microclima', 'San Luis, Argentina'),
-        ('Las Cataratas del Iguazú', 'Una de las maravillas naturales del mundo', 'Misiones, Argentina'),
-        ('Córdoba', 'Ciudad histórica con gran vida nocturna', 'Córdoba, Argentina'),
-        ('San Rafael, Mendoza', 'Destino famoso por sus bodegas y paisajes', 'Mendoza, Argentina');`;
+        INSERT INTO Destinos (Nombre, Descripcion, Ubicacion, Imagen) VALUES
+        ('Bariloche', 'Destino turístico en la Patagonia', 'Río Negro, Argentina', 'img/card4Bariloche1.webp'),
+        ('Jujuy', 'Destino con paisajes de montaña', 'Jujuy, Argentina', 'img/card5Jujuy1.webp'),
+        ('Merlo, San Luis', 'Destino conocido por su microclima', 'San Luis, Argentina', 'img/card6Sanluis1.jpg'),
+        ('Las Cataratas del Iguazú', 'Una de las maravillas naturales del mundo', 'Misiones, Argentina', 'img/card1cataratas.webp'),
+        ('Córdoba', 'Ciudad histórica con gran vida nocturna', 'Córdoba, Argentina', 'img/card3Cordoba.jpg'),
+        ('San Rafael, Mendoza', 'Destino famoso por sus bodegas y paisajes', 'Mendoza, Argentina', 'img/card2sanrafael.jpg');`;
 
         connection.query('SELECT COUNT(*) AS count FROM Destinos', (error, results) => {
             if (error) throw error;
@@ -46,30 +46,30 @@ function AgregarDestinos(){
 }
 function AgregarAlojamientos(){
     const queryInsertarAlojamientos = `
-        INSERT INTO Alojamientos (Nombre, Direccion, Tipo, PrecioPorNoche, DestinoID) VALUES
-        ('Hotel Llao Llao', 'Av. Bustillo Km. 25, Bariloche', 'hotel', 300.00, 1),
-        ('Hostal del Lago', 'Calle 24, Bariloche', 'hostal', 50.00, 1),
-        ('Apartamentos Catedral', 'Catedral Alta Patagonia, Bariloche', 'apartamento', 120.00, 1),
+            INSERT INTO Alojamientos (Nombre, Direccion, Tipo, PrecioPorNoche, Descripcion, DestinoID) VALUES
+            ('Hotel Llao Llao', 'Av. Bustillo Km. 25, Bariloche', 'hotel', 3000.00, 'Lujoso hotel con vistas impresionantes del lago y montañas. Disfruta de habitaciones elegantes, servicio de primera clase y una variedad de actividades recreativas al aire libre, incluyendo golf, senderismo y deportes acuáticos.', 1),
+            ('Hostal del Lago', 'Calle 24, Bariloche', 'hostal', 5000.00, 'Alojamiento económico cerca del centro de la ciudad. Perfecto para viajeros con presupuesto limitado que buscan comodidad y una ubicación conveniente para explorar los principales atractivos turísticos de Bariloche.', 1),
+            ('Apartamentos Catedral', 'Catedral Alta Patagonia, Bariloche', 'apartamento', 120.00, 'Apartamentos modernos cerca del centro de esquí. Ofrecen todas las comodidades necesarias para una estancia confortable, ideal para familias y grupos de amigos amantes de los deportes de invierno.', 1),
 
-        ('Hotel Huacalera', 'Ruta 9 Km. 1790, Jujuy', 'hotel', 100.00, 2),
-        ('Hostal Purmamarca', 'Calle Belgrano 123, Jujuy', 'hostal', 40.00, 2),
-        ('Apartamentos Tilcara', 'Av. Costanera 567, Jujuy', 'apartamento', 90.00, 2),
+            ('Hotel Huacalera', 'Ruta 9 Km. 1790, Jujuy', 'hotel', 1000.00, 'Hotel boutique en la Quebrada de Humahuaca. Combina el encanto de la arquitectura colonial con instalaciones modernas, proporcionando una experiencia única en un entorno histórico y cultural.', 2),
+            ('Hostal Purmamarca', 'Calle Belgrano 123, Jujuy', 'hostal', 40.00, 'Alojamiento económico en el corazón de Purmamarca. Disfruta de una atmósfera acogedora y familiar, a pocos pasos del Cerro de los Siete Colores y del mercado artesanal.', 2),
+            ('Apartamentos Tilcara', 'Av. Costanera 567, Jujuy', 'apartamento', 90.00, 'Apartamentos acogedores con vistas a las montañas. Equipados con todas las facilidades para una estancia prolongada, ideales para aquellos que desean explorar la belleza natural de la región.', 2),
 
-        ('Hotel Colonial', 'Av. del Sol 123, Merlo', 'hotel', 80.00, 3),
-        ('Hostal El Mirador', 'Calle de los Almendros 456, Merlo', 'hostal', 35.00, 3),
-        ('Apartamentos Las Sierras', 'Calle de la Sierra 789, Merlo', 'apartamento', 70.00, 3),
+            ('Hotel Colonial', 'Av. del Sol 123, Merlo', 'hotel', 8000.00, 'Hotel elegante con piscina y jardines. Ofrece habitaciones espaciosas y un servicio de calidad, perfecto para una escapada relajante en la naturaleza.', 3),
+            ('Hostal El Mirador', 'Calle de los Almendros 456, Merlo', 'hostal', 35.00, 'Hostal con vistas panorámicas de las sierras. Ideal para aventureros y amantes del aire libre, con acceso a múltiples rutas de senderismo y actividades al aire libre.', 3),
+            ('Apartamentos Las Sierras', 'Calle de la Sierra 789, Merlo', 'apartamento', 70.00, 'Apartamentos espaciosos con cocina equipada. Perfectos para familias y grupos que buscan un alojamiento cómodo y flexible, con la libertad de preparar sus propias comidas.', 3),
 
-        ('Gran Hotel Cataratas', 'Av. Victoria Aguirre 150, Iguazú', 'hotel', 200.00, 4),
-        ('Hostal Cataratas', 'Calle Fray Luis Beltrán 789, Iguazú', 'hostal', 60.00, 4),
-        ('Apartamentos Iguazú', 'Av. Tres Fronteras 123, Iguazú', 'apartamento', 150.00, 4),
+            ('Gran Hotel Cataratas', 'Av. Victoria Aguirre 150, Iguazú', 'hotel', 2000.00, 'Hotel de lujo con vistas a las cataratas. Ofrece instalaciones de primer nivel, incluyendo spa, restaurantes gourmet y acceso directo a las cataratas del Iguazú.', 4),
+            ('Hostal Cataratas', 'Calle Fray Luis Beltrán 789, Iguazú', 'hostal', 60.00, 'Hostal económico cerca del parque nacional. Perfecto para viajeros que buscan una opción accesible y conveniente para explorar las maravillas naturales de Iguazú.', 4),
+            ('Apartamentos Iguazú', 'Av. Tres Fronteras 123, Iguazú', 'apartamento', 150.00, 'Apartamentos modernos con piscina. Ideales para familias y grupos que desean un alojamiento con todas las comodidades, cerca de las principales atracciones turísticas.', 4),
 
-        ('Hotel Azur Real', 'San Jerónimo 243, Córdoba', 'hotel', 110.00, 5),
-        ('Hostal Córdoba', 'Calle Alvear 456, Córdoba', 'hostal', 45.00, 5),
-        ('Apartamentos Nueva Córdoba', 'Obispo Trejo 1100, Córdoba', 'apartamento', 95.00, 5),
+            ('Hotel Azur Real', 'San Jerónimo 243, Córdoba', 'hotel', 1100.00, 'Hotel moderno en el centro histórico de Córdoba. Combina el encanto de la arquitectura clásica con comodidades modernas, ideal para viajeros de negocios y turistas.', 5),
+            ('Hostal Córdoba', 'Calle Alvear 456, Córdoba', 'hostal', 45.00, 'Hostal acogedor cerca de la estación de trenes. Ofrece habitaciones confortables y un ambiente amigable, perfecto para mochileros y viajeros con presupuesto limitado.', 5),
+            ('Apartamentos Nueva Córdoba', 'Obispo Trejo 1100, Córdoba', 'apartamento', 95.00, 'Apartamentos en el barrio universitario. Ofrecen un alojamiento práctico y bien ubicado para estudiantes y turistas que desean explorar la vibrante vida nocturna de Córdoba.', 5),
 
-        ('Hotel Tower Inn', 'Hipólito Yrigoyen 774, San Rafael', 'hotel', 120.00, 6),
-        ('Hostal San Rafael', 'Av. Mitre 383, San Rafael', 'hostal', 50.00, 6),
-        ('Apartamentos Los Funes', 'Calle General Paz 123, San Rafael', 'apartamento', 80.00, 6);`;
+            ('Hotel Tower Inn', 'Hipólito Yrigoyen 774, San Rafael', 'hotel', 1200.00, 'Hotel de negocios con todas las comodidades. Ofrece habitaciones modernas, salas de conferencias y un restaurante de alta calidad, ideal para viajes de negocios y eventos.', 6),
+            ('Hostal San Rafael', 'Av. Mitre 383, San Rafael', 'hostal', 50.00, 'Hostal céntrico con ambiente familiar. Perfecto para viajeros que buscan un alojamiento acogedor y económico, cerca de las principales atracciones de San Rafael.', 6);
+        `;
 
         connection.query('SELECT COUNT(*) AS count FROM Alojamientos', (error, results) => {
             if (error) throw error;
@@ -112,20 +112,21 @@ connection.connect((err) => {
             }
 
             const queryCrearTablaUsuarios = `
-            CREATE TABLE IF NOT EXISTS Usuarios (
-                UsuarioID INT AUTO_INCREMENT PRIMARY KEY,
-                Nombre VARCHAR(100) NOT NULL,
-                Apellido VARCHAR(100) NOT NULL,
-                CorreoElectronico VARCHAR(255) NOT NULL,
-                Contra VARCHAR(255) NOT NULL
-            );`;
+                CREATE TABLE IF NOT EXISTS Usuarios (
+                    UsuarioID INT AUTO_INCREMENT PRIMARY KEY,
+                    Nombre VARCHAR(100) NOT NULL,
+                    Apellido VARCHAR(100) NOT NULL,
+                    CorreoElectronico VARCHAR(255) NOT NULL,
+                    Contra VARCHAR(255) NOT NULL
+                );`;
         
             const queryCrearTablaDestinos = `
                 CREATE TABLE IF NOT EXISTS Destinos (
                     DestinoID INT AUTO_INCREMENT PRIMARY KEY,
                     Nombre VARCHAR(100) NOT NULL,
                     Descripcion TEXT,
-                    Ubicacion VARCHAR(255) NOT NULL
+                    Ubicacion VARCHAR(255) NOT NULL,
+                    Imagen VARCHAR(255) -- Ajusta la longitud según necesites
                 );`;
             
             const queryCrearTablaAlojamientos = `
@@ -135,9 +136,11 @@ connection.connect((err) => {
                     Direccion VARCHAR(200),
                     Tipo ENUM('hotel', 'hostal', 'apartamento') NOT NULL,
                     PrecioPorNoche DECIMAL(10, 2) NOT NULL,
+                    Descripcion TEXT,
                     DestinoID INT,
                     FOREIGN KEY (DestinoID) REFERENCES Destinos(DestinoID) ON DELETE SET NULL
-                );`;
+                ); `;
+            
             
             const queryCrearTablaReservas = `
                 CREATE TABLE IF NOT EXISTS Reservas (
