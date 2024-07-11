@@ -16,12 +16,13 @@ const ObtenerAlojamientosConDestinos = (req, res) =>{
             d.DestinoID, 
             d.Nombre AS DestinoNombre, 
             d.Descripcion AS DestinoDescripcion, 
-            d.Ubicacion, 
+            d.Ubicacion,
+            d.Imagen,
             a.AlojamientoID, 
             a.Nombre AS AlojamientoNombre, 
             a.Direccion, 
             a.Tipo, 
-            a.PrecioPorNoche, 
+            a.PrecioPorNoche,
             a.Descripcion AS AlojamientoDescripcion
         FROM 
             Destinos d
