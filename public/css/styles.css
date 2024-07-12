@@ -473,3 +473,40 @@ img {
 .btn-acordeon{
     display: none;
 }
+
+.reserva{
+    width: 50%;
+}
+
+.reserva .reservaForm{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 0.5em;
+}
+
+.precio-total>label,
+.fecha_final>label,
+.fecha_inicio>label{
+    display: none;
+}
+
+
+.fecha_inicio>input,
+.fecha_final>input{
+    width: 100%;
+}
+
+.cantidad_noches{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.precio-total>input{
+    width: 100%;
+}
+
+#btnComprarPaquete{
+    width: 50%;
+    margin: auto;
+}

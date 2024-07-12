@@ -16,26 +16,30 @@ const IniciarSesion = (req, res) => {
         if (results.length === 0) {
             return res.status(404).send('Usuario no encontrado');
         }
-
         const usuario = results[0];
 
         if (usuario.Contra !== contra) {
             return res.status(401).send('Contraseña incorrecta');
         }
 
-        req.session.userId = usuario.UsuarioID;
+        req.session.usuario = {
+            id: usuario['UsuarioID'],
+            nombre: usuario['Nombre'],
+            correoElectronico: usuario['CorreoElectronico']
+        };
+
         return res.status(200).json({ mensaje: 'Inicio de sesión exitoso', usuario });
     });
 };
 
-const CrearUsuario = (req, res) =>{
-  
+const CrearUsuario = (req, res) => {
+
     const { nombre, apellido, correoElectronico, contra } = req.body;
-    
+
     if (!nombre || !apellido || !correoElectronico || !contra) {
         return res.status(400).json({ mensaje: 'Todos los campos son requeridos' });
     }
-    
+
     const queryBuscarUsuario = 'SELECT * FROM Usuarios WHERE CorreoElectronico = ?';
     const sqlInsertarUsuario = `INSERT INTO Usuarios (Nombre, Apellido, CorreoElectronico, Contra) VALUES (?, ?, ?, ?)`;
 
@@ -60,55 +64,53 @@ const CrearUsuario = (req, res) =>{
                 idUsuario: result.insertId
             });
         });
-    });  
+    });
 };
 
-const ObtenerUsuarioPorId = (req, res) =>{
-    const {id} = req.params;
+const ObtenerUsuarioPorId = (req, res) => {
+    const { id } = req.params;
     const sql = 'SELECT * FROM Usuarios WHERE UsuarioID = ?';
-    db.query(sql,[id], (err,result) =>
-    {
-        if(err) throw err;        
+    db.query(sql, [id], (err, result) => {
+        if (err) throw err;
         res.json(result);
     });
 };
 
-const BorrarUsuario = (req, res) =>{
-    const {id} = req.params;
-    const sql  = 'DELETE FROM Usuarios WHERE UsuarioID = ?';
-    db.query(sql,[id],(err,result) =>
-    {
-        if(err) throw err;
+const BorrarUsuario = (req, res) => {
+    const { id } = req.params;
+    const sql = 'DELETE FROM Usuarios WHERE UsuarioID = ?';
+    db.query(sql, [id], (err, result) => {
+        if (err) throw err;
         res.json(
             {
                 message: 'Usuario eliminado'
             });
     });
 };
+
 /* Obtener todos los usuarios */
-const ObtenerTodoslosUsuarios = (req, res) =>{
+const ObtenerTodoslosUsuarios = (req, res) => {
     const sql = 'SELECT * FROM Usuarios';
-    db.query(sql,(err,result)=>
-    {
-        if(err) throw err;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
         res.json(result);
     });
 };
 /* Actualizacion de Usuarios */
-const ActualizarUsuarios = (req, res) =>{
-    const {id} = req.params;
-    const{nombre,apellido,correoElectronico,contra} = req.body;
-    
+const ActualizarUsuarios = (req, res) => {
+    const { id } = req.params;
+    const { nombre, apellido, correoElectronico, contra } = req.body;
+
     const sql = 'UPDATE Usuarios SET Nombre = ?, Apellido = ?, CorreoElectronico= ?, Contra = ? WHERE UsuarioID = ?';
-        db.query(sql, [nombre, apellido, correoElectronico, contra, id], (err,result)=>{
-        if(err) throw err;
+    db.query(sql, [nombre, apellido, correoElectronico, contra, id], (err, result) => {
+        if (err) throw err;
         res.json({
             mensaje: 'Usuario Modificado con EXITO'
         });
     });
 };
 
-module.exports = 
+module.exports =
 {
     CrearUsuario,
     ObtenerUsuarioPorId,

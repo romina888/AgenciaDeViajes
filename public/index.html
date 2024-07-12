@@ -42,82 +42,7 @@
     <main class="paquetes contenedor ">
         <h2 class="paquetes__heading">Nuestros Paquetes</h2>
         
-        <div class="paquetes__listado">
-            <div class="paquete">
-                <div class="paquete__imagen">
-                    <img src="img/card1cataratas.webp" alt="Imagen" >
-                </div>
-
-                <div class="paquete__descripcion">
-                    <h3>Las Cataratas del Iguazú</h3>
-                    <p>Disfruta de 3 noches con desayuno, traslados cómodos y seguros, y emocionantes excursiones. ¡Tu escapada perfecta comienza aquí!</p>
-                    <p class="paquete__precio">$150000</p>
-
-                    <a class="btn" href="#">Comprar</a>
-                </div> <!-- Info Paquete -->
-            </div> <!-- paquete -->
-
-            <div class="paquete">
-                <img src="img/card2sanrafael.jpg" alt="Imagen" >
-
-                <div class="paquete__descripcion">
-                    <h3>San Rafael, Mendoza</h3>
-                    <p>Disfruta de 3 noches de alojamiento con desayuno incluido. Olvídate del estrés con nuestros traslados cómodos y seguros, y sumérgete en emocionantes excursiones que te llevarán a explorar lo mejor de cada lugar. ¡Tu escapada perfecta comienza aquí!</p>
-                    <p class="paquete__precio">$180000</p>
-
-                    <a class="btn" href="#">Comprar</a>
-                </div> <!-- Info Paquete -->
-            </div> <!-- paquete -->
-
-            <div class="paquete">
-                <img src="img/card3Cordoba.jpg" alt="Imagen" >
-
-                <div class="paquete__descripcion">
-                    <h3>Córdoba</h3>
-                    <p>Disfruta de 3 noches de alojamiento con desayuno incluido. Olvídate del estrés con nuestros traslados cómodos y seguros, y sumérgete en emocionantes excursiones que te llevarán a explorar lo mejor de cada lugar. ¡Tu escapada perfecta comienza aquí!</p>
-                    <p class="paquete__precio">$160000</p>
-
-                    <a class="btn" href="#">Comprar</a>
-                </div> <!-- Info Paquete -->
-            </div> <!-- paquete -->
-
-            <div class="paquete">
-                <img src="img/card4Bariloche1.webp" alt="Imagen" >
-
-                <div class="paquete__descripcion">
-                    <h3>Bariloche</h3>
-                    <p>
-                        Descubre más con nuestro paquete de viajes: 3 noches de alojamiento con desayuno, traslados y excursiones incluidas. ¡Todo listo para tu escapada perfecta!</p>
-                    <p class="paquete__precio">$220000</p>
-
-                    <a class="btn" href="#">Comprar</a>
-                </div> <!-- Info Paquete -->
-            </div> <!-- paquete -->
-
-            <div class="paquete">
-                <img src="img/card5Jujuy1.webp" alt="Imagen" >
-
-                <div class="paquete__descripcion">
-                    <h3>Jujuy</h3>
-                    <p>Descubre más con nuestro paquete de viajes: 3 noches de alojamiento con desayuno, traslados y excursiones incluidas. ¡Todo listo para tu escapada perfecta!</p>
-                    <p class="paquete__precio">$180000</p>
-
-                    <a class="btn" href="#">Comprar</a>
-                </div> <!-- Info Paquete -->
-            </div> <!-- paquete -->
-            
-            <div class="paquete">
-                <img src="img/card6Sanluis1.jpg" alt="Imagen" >
-
-                <div class="paquete__descripcion">
-                    <h3>Merlo, San Luis</h3>
-                    <p>Descubre más con nuestro paquete de viajes: 3 noches de alojamiento con desayuno, traslados y excursiones incluidas. ¡Todo listo para tu escapada perfecta!</p>
-                    <p class="paquete__precio">$130000</p>
-
-                    <a class="btn" href="#">Comprar</a>
-                </div> <!-- Info Paquete -->
-            </div> <!-- paquete -->
-
+        <div class="paquetes__listado" id="id_paquetes__listado">  
         </div> <!-- Fin de Listado de Productos -->
 
 
@@ -148,6 +73,30 @@
 
         </div>
     </selection>
+
+    <!-- Ventana Modal -->
+    <dialog class="reserva" id="modalReserva" >
+        <form class="reservaForm" method="dialog">
+            <div class="form-group fecha_inicio">
+                <label for="fechaInicio">Fecha de Inicio</label>
+                <input type="date" id="fechaInicio" name="fechaInicio" required>
+            </div>
+            <div class="form-group fecha_final">
+                <label for="fechaFinal">Fecha de Fin</label>
+                <input type="date" id="fechaFinal" name="fechaFinal" required>
+            </div>
+            <div class="form-group cantidad_noches">
+                <label for="cantidaDeNoches">Noches</label>
+                <input type="text" id="cantidaDeNoches" name="cantidaDeNoches" value="1" disabled>
+            </div>
+            <div class="form-group precio-total">
+                <label for="precioTotal">Total</label>
+                <input type="text" id="precioTotal" name="precioTotal" disabled>
+            </div>
+            <button type="button" class="btn" id="btnCancelar">Cancelar</button>
+            <button type="submit" class="btn" id="btnComprar">Comprar</button>
+        </form>
+    </dialog> 
 </main>
 
 
@@ -176,6 +125,6 @@
 
         <p class="copyright">Todos los derechos reservados &copy; </p>
     </footer>
-    
+    <script src="reservar.js"></script>
 </body>
 </html>
