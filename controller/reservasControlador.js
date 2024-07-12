@@ -10,7 +10,7 @@ const CrearReserva = (req, res) => {
     if (!fechaInicio || !fechaFin || !precioTotal || !AlojamientoID) {
         return res.status(400).json({ mensaje: 'Todos los campos son requeridos' });
     }
-    if (!req.session.usuario.id) {
+    if (!req.session.usuario) {
         return res.status(400).json({ mensaje: 'No hay session abierta' });
     }
 

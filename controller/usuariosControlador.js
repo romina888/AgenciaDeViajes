@@ -1,6 +1,6 @@
 const db = require('../db/db');
 
-const IniciarSesion = (req, res) => {
+const Login = (req, res) => {
     const { correoElectronico, contra } = req.body;
     if (!correoElectronico || !contra) {
         return res.status(400).json({ mensaje: 'Correo electrónico y contraseña son requeridos' });
@@ -31,6 +31,23 @@ const IniciarSesion = (req, res) => {
         return res.status(200).json({ mensaje: 'Inicio de sesión exitoso', usuario });
     });
 };
+
+const EstadoDeSesion = (req, res) =>{
+    if (req.session.usuario) {
+        res.json({ login: true, userId: req.session.userId });
+    } else {
+        res.json({ login: false });
+    }
+}
+// Verificar el estado de la sesión
+// app.get('/session-status', (req, res) => {
+//     if (req.session.userId) {
+//         res.json({ loggedIn: true, userId: req.session.userId });
+//     } else {
+//         res.json({ loggedIn: false });
+//     }
+// });
+
 
 const CrearUsuario = (req, res) => {
 
@@ -117,5 +134,6 @@ module.exports =
     BorrarUsuario,
     ObtenerTodoslosUsuarios,
     ActualizarUsuarios,
-    IniciarSesion
+    Login,
+    EstadoDeSesion
 }

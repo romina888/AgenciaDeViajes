@@ -84,6 +84,26 @@ const mostrarModal = (precioPorNoche, alojamientoID) => {
     });
 };
 
+const usuarioLogueado = async () => {
+
+    try {
+        const response = await fetch('/usuarios/session-status', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+
+    } catch (error) {
+        console.error('Hubo un problema con la solicitud fetch:', error.message);
+    }
+}
+
 const calcularTotalNoches = (precioPorNoche) => {
     const inicio = new Date(fechaInicial.value);
     const final = new Date(fechaFinal.value);
@@ -98,32 +118,47 @@ const calcularTotalNoches = (precioPorNoche) => {
 };
 
 const crearReserva = async (event, alojamientoID) => {
-    event.preventDefault();
-    const precioTotalDecimal = parseFloat(precioTotal.value.replace(/[^\d.-]/g, ""));
+    try {
+        const estadoSesion = await usuarioLogueado();
+        console.log('Estado de sesión:', estadoSesion);
+        
+        if (!estadoSesion || !estadoSesion.login) {
+            alert("Inicie sesión para crear una reserva");
+            window.location.href = 'login.html';
+            return;
+        }
 
-    const data = {
-        fechaInicio: fechaInicial.value,
-        fechaFin: fechaFinal.value,
-        precioTotal: precioTotalDecimal,
-        AlojamientoID: alojamientoID
+        event.preventDefault();
+        const precioTotalDecimal = parseFloat(precioTotal.value.replace(/[^\d.-]/g, ""));
+
+        const data = {
+            fechaInicio: fechaInicial.value,
+            fechaFin: fechaFinal.value,
+            precioTotal: precioTotalDecimal,
+            AlojamientoID: alojamientoID
+        };
+
+        console.log('Datos de reserva:', data); // Verifica los datos antes de enviarlos
+
+        const response = await fetch('/reservas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            alert(`Error al crear reserva: ${errorMessage}`);
+        } else {
+            alert("Reserva creada con éxito");
+        }
+
+    } catch (error) {
+        console.error('Error al crear reserva:', error.message);
     }
-    console.log(data)
-
-    const response = await fetch('/reservas', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-    });
-
-    if (!response.ok) {
-        const errorMessage = await response.text();
-        alert(`Error al crear reserva: ${errorMessage}`);
-    } else {
-        alert("Reserva Creado Con Éxito");
-    }
-}
+};
 
 btnCancelar.addEventListener('click', () => {
     modal.close();
