@@ -7,6 +7,7 @@ const usuariosRouter = require('./routes/usuarios');
 const destinosRouter = require('./routes/destinos');
 const alojamientosRouter = require('./routes/alojamientos');
 const reservasRouter = require('./routes/reservas');
+const contactoRouter = require('./routes/contacto');
 let port = 3000;
 
 
@@ -25,6 +26,7 @@ app.use('/usuarios',usuariosRouter);
 app.use('/destinos',destinosRouter);
 app.use('/alojamientos',alojamientosRouter);
 app.use('/reservas',reservasRouter);
+app.use('/contacto',contactoRouter);
 
 app.use(express.static(path.join(__dirname,'public')));
 

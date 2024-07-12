@@ -142,11 +142,21 @@ connection.connect((err) => {
                     FOREIGN KEY (UsuarioID) REFERENCES Usuarios(UsuarioID),
                     FOREIGN KEY (AlojamientoID) REFERENCES Alojamientos(AlojamientoID)
                 );`;
+
+                const queryCrearTablaContacto =`
+                CREATE TABLE IF NOT EXISTS Contacto(
+                    ContactoID INT AUTO_INCREMENT PRIMARY KEY,
+                    nombre_apellido VARCHAR(250) NOT NULL,
+                    correo_electronico VARCHAR(250) NOT NULL,
+                    telefono VARCHAR(20) NOT NULL,
+                    consulta TEXT NOT NULL 
+                    );`;
             
             crearTabla(queryCrearTablaUsuarios);
             crearTabla(queryCrearTablaDestinos);
             crearTabla(queryCrearTablaAlojamientos);
             crearTabla(queryCrearTablaReservas);
+            crearTabla(queryCrearTablaContacto);
 
             AgregarDestinos();
             AgregarAlojamientos();
