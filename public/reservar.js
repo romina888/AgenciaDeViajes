@@ -34,7 +34,8 @@ const crearDivsPaquetes = async () => {
     const data = await obtenerDestinosAlojamientos();
 
     data.forEach(item => {
-        let Img = item['Imagen'];
+        let img = item['Imagen'];
+        let destinoNombre = item['DestinoNombre']
         let destinoDescripcion = item['DestinoDescripcion'];
         let alojamientoDescripcion = item['AlojamientoDescripcion']
         let precioPorNoche = item['PrecioPorNoche']
@@ -44,81 +45,85 @@ const crearDivsPaquetes = async () => {
         divPaquete.classList.add('paquete');
         divPaquete.innerHTML = `
                         <div class="paquete__imagen">
-                            <img src="${item['Imagen']}" alt="Imagen">
+                            <img src="${img}" alt="Imagen">
                         </div>
                         <div class="paquete__descripcion">
-                            <h3>${item['DestinoNombre']}</h3>
-                            <p>${item['DestinoDescripcion']}</p>
-                            <p>${item['AlojamientoDescripcion']}</p>
-                            <p class="paquete__precio">$ ${item['PrecioPorNoche']}</p>
+                            <h3>${destinoNombre}</h3>
+                            <p>${destinoDescripcion}</p>
+                            <p>${alojamientoDescripcion}</p>
+                            <p class="paquete__precio">$ ${precioPorNoche}</p>
                             <button type="button" class="btn btnComprarPaquete">Comprar</button>
                         </div>
     `;
-    
-    const btnComprarPaquete = divPaquete.querySelector('.btnComprarPaquete');
-    btnComprarPaquete.addEventListener('click', () => mostrarModal(item));
-    contenedorListadoDePaquetes.appendChild(divPaquete);
+
+        const btnComprarPaquete = divPaquete.querySelector('.btnComprarPaquete');
+        btnComprarPaquete.addEventListener('click', () => mostrarModal(precioPorNoche, alojamientoID));
+
+        contenedorListadoDePaquetes.appendChild(divPaquete);
     });
 };
 
-
-
-const mostrarModal = (item) => {
+const mostrarModal = (precioPorNoche, alojamientoID) => {
     fechaInicial.value = '';
     fechaFinal.value = '';
-    precioTotal.value = `$ ${item['PrecioPorNoche']}`;
+    precioTotal.value = `$ ${precioPorNoche}`;
     cantidadDeNoches.value = '1';
 
-    modal.showModal(); 
+    modal.showModal();
 
-    fechaInicial.addEventListener('change', calcularTotalNoches(item));
-    fechaFinal.addEventListener('change', calcularTotalNoches(item));
+    fechaInicial.addEventListener('change', () => {
+        calcularTotalNoches(precioPorNoche);
+    });
 
-    btnComprar.addEventListener('click', async (event) => {
+    fechaFinal.addEventListener('change', () => {
+        calcularTotalNoches(precioPorNoche);
+    });
 
-        event.preventDefault();
-        // const formData = new FormData(crearUsuarioForm)
-    
-        const data = {
-            fechaInicio: fechaInicial.value,
-            fechaFin: fechaFinal.value,
-            precioTotal: 2000,
-            AlojamientoID: item['AlojamientoID']
-        }
-        console.log(data)
-
-    
-        const response = await fetch('/reservas', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
-    
-        if (!response.ok) {
-            const errorMessage = await response.text();
-            alert(`Error al crear reserva: ${errorMessage}`);
-        } else {
-            alert("Reserva Creado Con Éxito");
-        }
-    
+    btnComprar.addEventListener('click', (event) => {
+        crearReserva(event, alojamientoID);
     });
 };
 
-const calcularTotalNoches = (item) => {
+const calcularTotalNoches = (precioPorNoche) => {
     const inicio = new Date(fechaInicial.value);
     const final = new Date(fechaFinal.value);
-    const precioPorNoche = item['PrecioPorNoche']
 
     if (inicio && final && inicio <= final) {
-        const diffTime = Math.abs(final - inicio);
+        const diffTime = final.getTime() - inicio.getTime();
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         cantidadDeNoches.value = diffDays;
 
         precioTotal.value = `$ ${precioPorNoche * cantidadDeNoches.value}`;
     }
 };
+
+const crearReserva = async (event, alojamientoID) => {
+    event.preventDefault();
+    const precioTotalDecimal = parseFloat(precioTotal.value.replace(/[^\d.-]/g, ""));
+
+    const data = {
+        fechaInicio: fechaInicial.value,
+        fechaFin: fechaFinal.value,
+        precioTotal: precioTotalDecimal,
+        AlojamientoID: alojamientoID
+    }
+    console.log(data)
+
+    const response = await fetch('/reservas', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+        const errorMessage = await response.text();
+        alert(`Error al crear reserva: ${errorMessage}`);
+    } else {
+        alert("Reserva Creado Con Éxito");
+    }
+}
 
 btnCancelar.addEventListener('click', () => {
     modal.close();
